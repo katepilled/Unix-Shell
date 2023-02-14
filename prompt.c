@@ -6,20 +6,34 @@
 
 #include "prompt.h"
 
+/**
+ * @brief Generate a shell prompt
+ * 
+ */
 void createPrompt(){
 
-    char command[1001]; 
+    char cwd[1024];
 
     //get current working directory
-    char cwd[1024];
     getcwd(cwd, sizeof(cwd));
-    char * cwd_basename = basename(cwd);
 
-
+    //print prompt
     printf("[nyush ");
-    printf("%s", cwd_basename);
+    printf("%s", basename(cwd));
     printf("]$ ");
     fflush(stdout);
-    scanf("%s", command);
 
 }
+
+/**
+ * @brief Checks is user inputted command is valid or not
+ * 
+ * @param char array , user inputted command
+ * @return int; 1 if command is valid, 0 if invalid 
+ */
+int validCommand(char command[]){
+
+
+    return 0;
+}
+
