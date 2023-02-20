@@ -1,6 +1,5 @@
 #include <ctype.h>
 #include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 #include <libgen.h>
 
@@ -25,15 +24,15 @@ void createPrompt(){
 
 }
 
+
 /**
  * @brief Checks is user inputted command is valid or not
  * 
  * @param char array , user inputted command
  * @return int; 1 if command is valid, 0 if invalid 
  */
-int validCommand(char command[]){
+//int validCommand(char *command){
 
-
-    return 0;
-}
+  //  return 1;
+//}
 
