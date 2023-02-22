@@ -41,7 +41,7 @@ char ** formatCommand(char *command){
   while (temp != NULL){
       argv[i] = (char *) malloc(strlen(temp) + 1);
       strcpy(argv[i], temp);
-      temp = strtok(NULL, command);
+      temp = strtok(NULL, " ");
       i++;
   }
   return argv;
