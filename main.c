@@ -12,7 +12,7 @@ https://www.w3schools.com/c/c_user_input.php
 https://stackoverflow.com/questions/22452314/how-to-get-the-current-working-directorycurrent-working-folder-name-instead-of
 https://www.qnx.com/developers/docs/6.4.0/neutrino/lib_ref/g/getcwd.html
 https://www.tutorialspoint.com/c_standard_library/string_h.htm
-tutorialspoint.com/c_standard_library/c_function_strtok.htm
+https://stackoverflow.com/questions/2693776/removing-trailing-newline-character-from-fgets-input
 
 */
 
@@ -30,9 +30,12 @@ int main(){
         
         //get user input/command
         fgets(command, 1001, stdin);
-        argv = formatCommand(command);
-        printf("%s", argv[1]);
-    
+
+        //remove terminating newline char
+        command[strcspn(command, "\n")] = 0;
+
+        //format to char**
+        argv = formatCommand(command);    
 
         //ls function
         if (strcmp(argv[0], "ls\n") == 0 || strcmp(argv[0], "ls") == 0){
