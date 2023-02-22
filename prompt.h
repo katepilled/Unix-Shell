@@ -2,6 +2,6 @@
 #define _PROMPT_H_
 
 void createPrompt();
-int validCommand(char *command);
+char **formatCommand(char* command);
 
 #endif

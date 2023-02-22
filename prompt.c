@@ -1,8 +1,9 @@
 #include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <libgen.h>
-
+#include <string.h>
 #include "prompt.h"
 
 /**
@@ -21,18 +22,30 @@ void createPrompt(){
     printf("%s", basename(cwd));
     printf("]$ ");
     fflush(stdout);
-
 }
 
 
 /**
- * @brief Checks is user inputted command is valid or not
+ * @brief makes user inputted command into a format that is like argv
  * 
- * @param char array , user inputted command
- * @return int; 1 if command is valid, 0 if invalid 
+ * @param command user input, prompted by shell prompt
+ * @return char** argv, newly formatted command
  */
-//int validCommand(char *command){
+char ** formatCommand(char *command){
+  //tokenize by white space char
+  char *temp = strtok(command, " ");
+  char **argv = malloc(strlen(command)* sizeof(char *));
 
-  //  return 1;
-//}
+  //get user command formatted as argv
+  int i = 0;
+  while (temp != NULL){
+      argv[i] = (char *) malloc(strlen(temp) + 1);
+      strcpy(argv[i], temp);
+      temp = strtok(NULL, command);
+      i++;
+  }
+  return argv;
+}
+
+//NOTE: FREE THE THINGS!!
 
