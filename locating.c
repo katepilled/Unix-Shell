@@ -10,26 +10,30 @@
 /**
  * @brief 
  * 
+ * @param argv 
  */
 void ls(char **argv){
+
     pid_t pid;
     int exitStatus; 
+    argv[0] = "/bin/ls";
     
     pid = fork();
 
     // fork failed (this shouldn't happen)
     if (pid < 0) {
         fprintf(stderr, "Error: Failed to fork\n"); 
-        exit(0);
+        exit(-1);
     } 
     // child (new process)
     else if (pid == 0) {
-        execv("/bin/ls", argv); 
+        execv(argv[0], argv); 
         fprintf(stderr, "Error: Invalid Program\n"); 
+        exit(-1);
     
     // parent
     } else {
-        waitpid(-1, &exitStatus ,0);
+        waitpid(-1, &exitStatus, 0);
     }
 }
 
