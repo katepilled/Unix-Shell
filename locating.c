@@ -14,8 +14,6 @@
 void ls(char **argv){
     pid_t pid;
     int exitStatus; 
-    argv[0] = "/bin/ls";
-
     
     pid = fork();
 
@@ -26,7 +24,7 @@ void ls(char **argv){
     } 
     // child (new process)
     else if (pid == 0) {
-        execv(argv[0], argv); 
+        execv("/bin/ls", argv); 
         fprintf(stderr, "Error: Invalid Program\n"); 
     
     // parent
