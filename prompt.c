@@ -7,11 +7,14 @@
 #include "prompt.h"
 
 /**
- * @brief Generate a shell prompt
+ * @brief creates shell prompt and accepts user input
  * 
+ * @return char** argv, command entered by user for shell to execute
  */
-void createPrompt(){
+char ** createPrompt(){
 
+    char command[1001];
+    char **argv = NULL;
     char cwd[1024];
 
     //get current working directory
@@ -22,8 +25,17 @@ void createPrompt(){
     printf("%s", basename(cwd));
     printf("]$ ");
     fflush(stdout);
-}
 
+    //get user input/command
+    fgets(command, 1001, stdin);
+
+    //remove terminating newline char
+    command[strcspn(command, "\n")] = 0;
+
+    //format to char**
+    argv = formatCommand(command);
+    return argv;    
+}
 
 /**
  * @brief makes user inputted command into a format that is like argv
