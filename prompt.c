@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <libgen.h>
 #include <string.h>
+
 #include "prompt.h"
 
 /**
@@ -27,7 +28,7 @@ char ** createPrompt(){
     fflush(stdout);
 
     //get user input/command
-    fgets(command, 1001, stdin);
+    fgets(command, sizeof(command), stdin);
 
     //remove terminating newline char
     command[strcspn(command, "\n")] = 0;
