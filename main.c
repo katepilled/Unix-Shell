@@ -1,9 +1,11 @@
 #include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "prompt.h"
 #include "locating.h"
+#include "builtIn.h"
 
 
 /* SOURCES USED:
@@ -17,19 +19,35 @@ https://stackoverflow.com/questions/2693776/removing-trailing-newline-character-
 
 //docker run -i --name cs202 --privileged --rm -t -v ~/Documents/cs202/labs:/cs202 -w /cs202 ytang/os bash
 //cd OS-lab2-nyush
-//gcc main.c prompt.c locating.c
+//gcc main.c prompt.c locating.c builtIn.c
 
 int main(){
     char **argv = NULL; 
 
     while (1){
 
-        argv = createPrompt(); 
+        argv = createPrompt();
 
         //ls function
-        if (strcmp(argv[0], "ls\n") == 0 || strcmp(argv[0], "ls") == 0){
+        if (strcmp(argv[0], "ls") == 0){
             ls(argv);
+        }
+
+        //cd function
+        else if (strcmp(argv[0], "cd") == 0){
+            changeDirectory(argv);
+        }
+        
+        else if (strcmp(argv[0], "exit") == 0){
+            if (exitCheck(argv) == 0){
+                exit(0);
+            }
+        }
+
+        else {
+            fprintf(stderr, "error command 1\n");
         }
     }
     return 0;
 }
+
