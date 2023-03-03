@@ -13,8 +13,9 @@
  * @return char** argv, command entered by user for shell to execute
  */
 char ** createPrompt(){
-
-    char command[1001];
+ 
+    char *command = NULL;
+    size_t size = 1001;
     char **argv = NULL;
     char cwd[1024];
 
@@ -28,13 +29,22 @@ char ** createPrompt(){
     fflush(stdout);
 
     //get user input/command
-    fgets(command, sizeof(command), stdin);
+    if(getline(&command, &size, stdin) == -1){
+      printf("\n");
+      exit(0);
+    }
 
     //remove terminating newline char
     command[strcspn(command, "\n")] = 0;
+    
+    //check if input is empty
+    if (command[0] == '\0' || command[0] == ' '){
+      return NULL;
+    }
 
     //format to char**
     argv = formatCommand(command);
+    free(command);
     return argv;    
 }
 
@@ -61,4 +71,3 @@ char ** formatCommand(char *command){
 }
 
 //NOTE: FREE THE THINGS!!
-
