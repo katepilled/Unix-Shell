@@ -18,8 +18,7 @@ https://stackoverflow.com/questions/2693776/removing-trailing-newline-character-
 */
 
 //docker run -i --name cs202 --privileged --rm -t -v ~/Documents/cs202/labs:/cs202 -w /cs202 ytang/os bash
-//cd OS-lab2-nyush
-//gcc main.c prompt.c locating.c builtIn.c
+//gcc nyush.c prompt.c locating.c builtIn.c
 
 int main(){
     char **argv = NULL; 
@@ -28,9 +27,8 @@ int main(){
 
         argv = createPrompt();
 
-        //ls function
-        if (strcmp(argv[0], "ls") == 0){
-            ls(argv);
+        if (argv == NULL){
+            continue;
         }
 
         //cd function
@@ -45,8 +43,9 @@ int main(){
         }
 
         else {
-            fprintf(stderr, "error command 1\n");
-        }
+            run(argv);
+        } 
+
     }
     return 0;
 }
