@@ -1,6 +1,6 @@
 #ifndef _LOCATING_H_ 
 #define _LOCATING_H_ 
 
-void ls(char **argv);
+void run(char **argv);
 
 #endif
