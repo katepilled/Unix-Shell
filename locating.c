@@ -17,10 +17,17 @@ void run(char **argv){
 
     pid_t pid;
     int exitStatus; 
-    
+
+    //if user specifies basename 
     if (strchr(argv[0], '/') == NULL){
-        argv[0] = strcat("/usr/bin/", argv[0]);
-        
+        char* path = "/usr/bin/";
+        char* base = argv[0];
+        char buffer[1001];
+
+        //make argv[0] /user/bin/BASENAME
+        strcpy(buffer, path); 
+        strcat(buffer, base);  
+        strcpy(argv[0], buffer); 
     } 
 
     pid = fork();
@@ -37,9 +44,10 @@ void run(char **argv){
         fprintf(stderr, "Error: invalid program\n"); 
         fflush(stderr);
         exit(-1);
-    
+    }
+
     // parent
-    } else {
+     else {
         waitpid(-1, &exitStatus, 0);
     }
 }
