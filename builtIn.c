@@ -13,17 +13,20 @@
 void changeDirectory(char **argv){
     //if there are no args
     if (argv[1] == NULL){
-        fprintf(stderr, "Error: Invalid command.\n");
+        fprintf(stderr, "Error: invalid command\n");
+        fflush(stderr);
     }
     
     //if there are 2+ args
     else if (argv[2] != NULL){
-        fprintf(stderr, "Error: Invalid command.\n");
+        fprintf(stderr, "Error: invalid command\n");
+        fflush(stderr);
     }
 
     //if chdir fails
     else if (chdir(argv[1]) == -1){
-        fprintf(stderr, "Error: Invalid directory\n");
+        fprintf(stderr, "Error: invalid directory\n");
+        fflush(stderr);
     }
 }
 
@@ -37,6 +40,7 @@ int exitCheck(char **argv){
     //if program accepts args
     if (argv[1] != NULL){
         fprintf(stderr, "Error: invalid command\n");
+        fflush(stderr);
         return 1;
     }
 
