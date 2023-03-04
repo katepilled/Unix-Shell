@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <libgen.h>
 #include <string.h>
+#include <signal.h>
 
 #include "prompt.h"
 
@@ -13,7 +14,6 @@
  * @return char** argv, command entered by user for shell to execute
  */
 char ** createPrompt(){
- 
     char *command = NULL;
     size_t size = 1001;
     char **argv = NULL;
@@ -33,6 +33,12 @@ char ** createPrompt(){
       printf("\n");
       exit(0);
     }
+
+    //signal handling - ignore SIGNINT, SIGQUIT, SIGTSTP
+    signal(SIGINT, SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGTSTP, SIG_IGN);
+
 
     //remove terminating newline char
     command[strcspn(command, "\n")] = 0;
